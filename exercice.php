@@ -78,9 +78,11 @@
 
     $tarifRemise = $prixTotal*10/100;
     echo $tarifRemise."<br>";
+    echo "<p> le montant de la remise s'élève à : ".$tarifRemise."</p>";
 
     $prixRemise=$prixTotal*0.9;
     echo $prixRemise."<br>";
+    echo "<p> le montant du prix remisé : ".$prixRemise."</p>";
 
     
     // Exo 7:
@@ -94,6 +96,53 @@
     // Résultat - Exo 7:
     $montantEuros*=$tauxChange;
     echo $montantEuros."<br>";
+
+    # EXERCICE:
+    // Exo 8:
+    # soit la variable age suivante
+    $age = 18;
+    #ecrire le code qui permet de verifier si age est superieur a 18
+    # si age est superieur ou egale a 18 afficher => majeur
+    # si age est inferieur a 18 afficher => mineur
+
+    // Résultat - Exo 8:
+    if($age>=18){
+        echo "majeur"."<br>";
+    }else
+        echo "mineur"."<br>";
+
+
+    # EXERCICE:
+    // une annee bissextile est une annee divisible par 4 et pas par 100 ou divisible par 400
+    // ecrire un programme qui permet de verifier si une annee est bisextile ou pas
+    // si elle l'est affiche annee bissextile
+    // si non affiche annee pas bissextile
+
+    $annee = 368;
+
+    if(($annee % 4 == 0 && !$annee % 100 == 0) OR ($annee % 400 == 0)){
+        echo "bissextile"."<br>";
+    }else{
+        echo "non bissextile"."<br>";
+    }
+
+
+    # EXERCICE:
+    #soit la variable nombre
+    #ecrire un programme qui permet de tester si elle est paire ou impaire
+    #si elle est paire afficher => le nombre est paire
+    #si non afficher => le npombre est impaire
+
+    $nombre = 28;
+
+    if ($nombre % 2 == 0 ){
+        echo "le nombre est paire"."<br>";
+    }else{
+        echo "le nombre est non paire"."<br>";
+    }
+
+
+
     ?>
 
 </body>
