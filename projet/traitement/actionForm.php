@@ -15,6 +15,12 @@
     echo "Connection failed: " . $e->getMessage();
     }
 
+    
+    echo "<pre>";
+    var_dump($_POST);
+    echo "</pre>";
+    die;
+
     // Données à insérer
     $firstname = "John";
     $lastname = "Doe";
@@ -38,6 +44,11 @@
     } catch (PDOException $e) {
         echo "Erreur d'insertion : " . $e->getMessage();
     }
+
+    echo "<pre>";
+    var_dump($_post);
+    echo "</pre>";
+    die;
 
 
 ?>
