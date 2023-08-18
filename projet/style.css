@@ -1,3 +1,12 @@
+
+body{
+    font-family: 'Montserrat', sans-serif;
+}
+
+h1{
+    text-align: center;
+}
+
 .container{
     width: 50%;
     margin: auto;
@@ -7,7 +16,7 @@ form{
 margin: auto;
 }
 
-input{
+.champs{
     width: 90%;
     height: 40px;
     border: 1px solid black;
@@ -16,15 +25,72 @@ input{
     margin-top: 10px;
 }
 
+.champs2{
+    width: 215px;
+    height: 40px;
+    border: 1px solid black;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    margin-top: 10px;
+}
+
+#phone,
+.number{
+    margin-left: 50px;
+}
+
+.flexy{
+    display: flex;
+}
+
+.numb{
+    border: none;
+}
+
 #submit{
     background-color: black;
     color: white;
     font-family: 'Montserrat', sans-serif;
     font-weight: 500;
     letter-spacing: 2px;
+    margin-top: 50px;
     
 }
 
 label{
     font-weight: 500;
+}
+
+Select{
+    width: 91%;
+    height: 40px;
+    border: 1px solid black;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    margin-top: 10px;
+}
+
+h2{
+    margin-top: 50px;
+}
+
+.radio {
+    width: 87%;
+    border: 1px solid black;
+    border-radius: 5px;
+    /* margin-bottom: 20px;
+    margin-top: 10px; */
+    margin: 10px 0 20px 0;
+}
+
+.checkbox{
+    margin-top: 50px;
+}
+
+.condition{
+    font-size: 13px;
+}
+
+.com{
+    margin-top: 50px;
 }
