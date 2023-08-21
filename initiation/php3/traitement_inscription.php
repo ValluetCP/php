@@ -6,12 +6,16 @@ if(isset($_POST['firstname']) && isset($_POST['lastname']) && isset($_POST['emai
     echo 'Bonjour'. ' '.$_POST['firstname'].$_POST['lastname'];
 
 }else {
-    echo $_POST['firstname'].'<br>';
-    echo $_POST['lastname'].'<br>';
-    echo $_POST['email'].'<br>';
-    echo $_POST['password'].'<br>';
-    echo $_POST['confirm'].'<br>';
+    // echo $_POST['firstname'].'<br>';
+    // echo $_POST['lastname'].'<br>';
+    // echo $_POST['email'].'<br>';
+    // echo $_POST['password'].'<br>';
+    // echo $_POST['confirm'].'<br>';
+    if(($_POST['password']) == ($_POST['confirm'])){
+        echo 'le mot de passe ne concorde pas, veuillez réessayer';
 
-    echo  "Vous devez remplir tous les champs.";
+    }else{
+        echo  "Vous devez remplir tous les champs.";
+    } 
 
  } ?>
