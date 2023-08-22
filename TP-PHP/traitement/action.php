@@ -8,7 +8,7 @@ include('../head.php');
 <?php
 
 //isset permet de verifier si la variable existe et est différent de vide
-if(isset($_POST['nom']) && isset($_POST['prenom'])   && isset($_POST['password'])  ) {
+if(isset($_POST['nom']) && isset($_POST['prenom']) && isset($_POST['password'])  ) {
     echo '<div class="alert alert-success">Bonjour ' . $_POST['nom'] . ' '.$_POST['prenom'] .'</div>';
 }else {?>
 
