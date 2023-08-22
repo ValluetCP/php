@@ -18,12 +18,12 @@ if(isset($_POST['inscription'])){
 
     // ----------  REQUETE D'INSERTION ---------- //
     //préparation de la requête
-    $request = $db->prepare("INSERT INTO utilisateur (nom, prenom, email, mdp) VALUES (?, ?, ?, ?) ");
+    $request = $db->prepare("INSERT INTO utilisateur (email, pseudo, mdp) VALUES (?, ?, ?) ");
     // (nom, prenom, email, mdp) : nom des colonnes
 
     //exécution de la requete
     try{ // essayer d'enregister les infos dans la table utilisateur
-        $request->execute(array($nom, $prenom, $email, $mdpCrypt));
+        $request->execute(array($email, $pseudo, $mdpCrypt));
     }catch(PDOexception $e){
         echo $e->getMessage(); // afficher l'erreur sql généré
     }
