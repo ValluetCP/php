@@ -29,7 +29,8 @@ Si tous les champs sont remplis et les mots de passe correspondent, affichez un 
 Si au moins un champ est vide ou les mots de passe ne correspondent pas, affichez un message d'erreur et indiquez les champs manquants ou incohérents.
 Dans le fichier HTML, assurez-vous que le formulaire envoie les données soumises à la page de traitement PHP (traitement_inscription.php) en utilisant la méthode POST. -->
     
-    <form action="traitement_inscription.php" method="post">
+    <form action="traitement_inscription.php" method="post" enctype="multipart/form-data">
+        <!-- enctype : traitement de fichier, document ou photo.... -->
 
             <label for="firstname">First name</label><br><br>
             <input class="champs" type="text" name="firstname" id="firstname" placeholder=" Enter your firstname" required><br><br>
