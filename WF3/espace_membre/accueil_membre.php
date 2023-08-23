@@ -1,3 +1,12 @@
+
+<?php
+session_start(); // à mettre avant le html pour démarrer une session
+if(!isset($_SESSION['id'])){ // vérifie si la session est active
+    header("Location: connexion.php"); // redirection vers la page connexion (le formulaire)
+    
+    // cette page doit être accessible uniquement si l'utilisateur est connecté
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,15 +17,8 @@
     <title>Espace membre - Accueil</title>
 </head>
 <body>
-<div class="flexbox haut">
-        <h2>Page d'inscription</h2>
-        <input type="submit" class="connect submit" name="connect" value="Déconnexion">
-    </div>
+    <?php include_once "nav.php"; ?>
 
-    <form method="POST" action="traitement_2.php" enctype="multipart/form-data">
 
-        
- 
-    </form>
 </body>
 </html>

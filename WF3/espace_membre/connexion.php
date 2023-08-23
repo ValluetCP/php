@@ -8,6 +8,8 @@
     <title>Espace membre - Connexion</title>
 </head>
 <body>
+<?php include_once "nav.php"; ?>
+
     <div class="flexbox haut">
         <h2>Page Connexion</h2>
         <input type="submit" class="connect submit" name="connect" value="Connexion">
@@ -20,7 +22,7 @@
         <input type="password" name="mdp" placeholder=" Mot de Passe"><br><br>
 
         <div class="flexy">
-            <input type="submit" class="inscription submit" name="inscription" value=" Connexion">
+            <input type="submit" class="inscription submit" name="connect" value=" Connexion">
         </div>
         
     </form>
