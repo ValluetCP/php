@@ -3,7 +3,6 @@ require_once("database_2.php");
 
 if(isset($_POST['inscription'])){
     // récupération des données saisies par l'utilisateur
-    $email=htmlspecialchars($_POST['email']);
     $pseudo=htmlspecialchars($_POST['pseudo']);
     $mdp=htmlspecialchars($_POST['mdp']);
 
@@ -13,23 +12,19 @@ if(isset($_POST['inscription'])){
     // il faut se connecter à la base de donnée
     $db = dbConnexion(); //permet d'établir la connexion avec la base de donnée
 
-    // var_dump($db); // voir ce qu'il retourne
-    $imgName = $_FILES ['image']['name']; // nom de l'image
-    $tmpName = $_FILES ['image']['tmp_name']; // localisation temporaire sur le server
-
     // $_SERVER['DOCUMENT_ROOT'] pointe à la racine du server c'est à dire le dossier principal (dossier racine)
     $destination = $_SERVER['DOCUMENT_ROOT'].'/php/WF3/espace_membre/image/'.$imgName; // destination finale de mon image
     //echo $destination;
     move_uploaded_file($tmpName,$destination);
 
-    // ----------  REQUETE D'INSERTION ---------- //
-    //préparation de la requête
-    $request = $db->prepare("INSERT INTO membres (email, pseudo, mdp, profil_img) VALUES (?, ?, ?, ?) ");
-    // (nom, prenom, email, mdp) : nom des colonnes
+           // ----------  REQUETE DE LECTURE ---------- //
+
+    //préparation de la requête de lecture
+    $request = $db->prepare("SELECT * FROM membres WHERE pseudo: ?");
 
     //exécution de la requete
     try{ // essayer d'enregister les infos dans la table utilisateur
-        $request->execute(array($email, $pseudo, $mdpCrypt, $imgName ));
+        $request->execute(array($pseudo, $mdpCrypt));
     }catch(PDOexception $e){
         echo $e->getMessage(); // afficher l'erreur sql généré
     }

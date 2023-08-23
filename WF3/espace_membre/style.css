@@ -1,0 +1,94 @@
+body{
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    
+}
+
+.submit{
+    color: white;
+}
+
+.flexbox{
+    display: flex;
+
+}
+
+form{
+    width: 40%;
+    margin: auto;
+}
+
+form>input{
+    width: 100%;
+    height: 60px;
+    border: 1px solid black;
+    border-radius: 10px;
+    background-color: #eeeeee;
+}
+
+::placeholder{
+    font-size: 20px; 
+}
+
+.inscription{
+    background-color: #b45f06;
+    font-size: 20px;
+    width: 50%;
+    height: 60px;
+    border: 1px solid black;
+    border-radius: 10px;
+}
+
+.flexy{
+    display: flex;
+    justify-content: end;
+    margin-top: 30px;
+}
+
+.connect{
+    height: 40px;
+    border: 1px solid black;
+    border-radius: 10px;
+    background-color: #188038;
+    font-size: 20px;
+    width: 250px;
+    margin-right: 50px;
+    
+}
+
+h2{
+    margin-left: 50px;
+}
+
+input::file-selector-button {
+    /* font-weight: bold; */
+    background-color: #d89751;
+    color: white;
+    padding: 0.5em;
+    border: thin solid grey;
+    border-radius: 5px;
+    font-size: 15px;
+    height: 60px;
+    width: 200px;
+    letter-spacing: 2px;
+  }
+
+.haut{
+    background-color: #eeeeee;
+    border: 1px solid black;
+    width: 80%;
+    margin: auto;
+    height: 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 50px;
+    margin-top: 20px;
+    
+}
+
+.file{
+    font-size: 15px; 
+}
+
