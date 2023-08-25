@@ -16,4 +16,3 @@ function dbConnexion(){
     }
     return $connexion;
 }
-echo 'red';

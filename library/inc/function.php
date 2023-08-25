@@ -1,5 +1,10 @@
 <?php
-require_once('./db_connection.php')
 
+function debug($param){
+    
+    echo '<pre>';
+    var_dump($param);
+    echo '</pre>';
+}
 
 ?>

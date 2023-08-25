@@ -1,6 +1,6 @@
-<?php
+<!-- <?php
 echo "test";
-?>
+?> -->
 
 <?php
 require_once('./inc/header.php');
