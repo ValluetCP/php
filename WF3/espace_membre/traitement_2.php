@@ -29,6 +29,7 @@ if(isset($_POST['inscription'])){
 
     $tmpName = $_FILES ['image']['tmp_name']; // localisation temporaire sur le server
 
+
     // ----------  DESTINATION DE L'IMAGE ---------- //
 
     //1
@@ -42,6 +43,8 @@ if(isset($_POST['inscription'])){
     //echo $destination;
     move_uploaded_file($tmpName,$destination);
     // permet de prendre l'image et de la mettre dans le dossier que l'on a pointé au dessus.
+    // 1er paramètre, la destination temporaire où a été stocker le fichier temporairement
+    // 2ème paramètre, c'est la destination que l'on souhaite
 
     
 
@@ -96,7 +99,7 @@ if(isset($_POST['connect'])){
         // echo "Utilisateur inconnu...";
         $_SESSION['error'] = "Utilisateur inconnu..."; // ajouter le message d'erreur dans le tableau $_SESSION
         header("Location: connexion.php"); // redirige vers connexion.php, penser à ajouter sur cette page, en haut, la fonction session_start(); pour faire la liaison entre les fichiers.
-        
+
     }else{//sinon
         //vérifie le mot de passe (est-ce cette chaine de caractère qui est à l'origine du cryptage)
         if(password_verify($mdp,$utilisateur["mdp"])){
@@ -113,14 +116,37 @@ if(isset($_POST['connect'])){
             // $_MAJUSCULE : tous les éléments de ce type retourne des tableaux
             
             header("Location: accueil_membre.php");// redirige vers accueil_membre.php, penser à ajouter sur cette page, en haut, la fonction session_start();
+
+            // autre syntaxe : 
+            // echo"<script>location.href='accueil_membre.php'</script>";
             
         }else{
-            echo "mot de passe incorrect";
-            header("refresh:2;http://localhost/php/WF3/espace_membre/connexion.php");
+            $_SESSION['error'] = "mot de passe incorrect";
+            header("Location: connexion.php"); 
+            // header("refresh:2;http://localhost/php/WF3/espace_membre/connexion.php");
         }
         
     } 
 }
 
-//pour l'accueil
+//pour la publication
+if(isset($_POST['publier'])){
+    $message = htmlspecialchars($_POST['message']);
+    $image_name = $_FILES['img']['name'];
+    $tmp = $_FILES['img']['tmp_name'];
+    $destination = $_SERVER['DOCUMENT_ROOT'].'/php/WF3/espace_membre/image/'.$image_name;
+
+    move_uploaded_file($tmp, $destination);
+    
+    // connexion à la base de donnée
+    $dbconnect = dbconnexion();
+    // préparation de la requête
+    $request = $dbconnect->prepare("INSERT INTO posts (membre_id, photo, text) VALUES (?,?,?)");
+    //executtion de la requête
+    try{
+        $request->execute(array($_SESSION["id"], $image_name, $message));
+    }catch(PDOException $e){
+        echo $e->getMessage();
+    }
+}
 ?>

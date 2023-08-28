@@ -1,4 +1,6 @@
-<?php session_start(); ?>
+<?php session_start(); 
+// session_destroy();
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -21,7 +23,7 @@
 
         <?php if(isset($_SESSION['error'])){?>
             <p><?= $_SESSION['error']; ?></p>
-        <?php } ?>
+        <?php } unset($_SESSION['error']); ?>
 
         <input type="text" name="pseudo" placeholder=" Votre pseudo"><br><br>
         
@@ -30,6 +32,7 @@
         <div class="flexy">
             <input type="submit" class="inscription submit" name="connect" value=" Connexion">
         </div>
+
         
     </form>
 </body>
