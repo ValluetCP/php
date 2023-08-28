@@ -93,7 +93,10 @@ if(isset($_POST['connect'])){
     echo "<pre>";
     //si aucun utilisateur de correspond, il retourne un tableau vide
     if(empty($utilisateur)){ // si le tableau $utilisateur est vide
-        echo "Utilisateur inconnu...";
+        // echo "Utilisateur inconnu...";
+        $_SESSION['error'] = "Utilisateur inconnu..."; // ajouter le message d'erreur dans le tableau $_SESSION
+        header("Location: connexion.php"); // redirige vers connexion.php, penser à ajouter sur cette page, en haut, la fonction session_start(); pour faire la liaison entre les fichiers.
+        
     }else{//sinon
         //vérifie le mot de passe (est-ce cette chaine de caractère qui est à l'origine du cryptage)
         if(password_verify($mdp,$utilisateur["mdp"])){
@@ -109,7 +112,7 @@ if(isset($_POST['connect'])){
             La seconde valeur: c'est le nom des colonnes*/
             // $_MAJUSCULE : tous les éléments de ce type retourne des tableaux
             
-            header("Location: accueil.php")
+            header("Location: accueil_membre.php");// redirige vers accueil_membre.php, penser à ajouter sur cette page, en haut, la fonction session_start();
             
         }else{
             echo "mot de passe incorrect";

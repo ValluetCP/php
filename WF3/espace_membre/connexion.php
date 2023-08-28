@@ -1,3 +1,5 @@
+<?php session_start(); ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,12 +12,16 @@
 <body>
 <?php include_once "nav.php"; ?>
 
-    <div class="flexbox haut">
+    <!-- <div class="flexbox haut">
         <h2>Page Connexion</h2>
         <input type="submit" class="connect submit" name="connect" value="Connexion">
-    </div>
+    </div> -->
 
     <form method="POST" action="traitement_2.php" enctype="multipart/form-data">
+
+        <?php if(isset($_SESSION['error'])){?>
+            <p><?= $_SESSION['error']; ?></p>
+        <?php } ?>
 
         <input type="text" name="pseudo" placeholder=" Votre pseudo"><br><br>
         
