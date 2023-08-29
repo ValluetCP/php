@@ -114,3 +114,25 @@ input::file-selector-button {
     justify-content: end;
 }
 
+/* Page accueil */
+
+.containerPost{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    margin: auto;
+}
+
+.post{
+    width: 100px;
+}
+
+img{
+    width:300%;
+}
+
+.fa-heart{
+    margin-left: 20px;
+    color: rgb(141, 4, 4);
+}
+

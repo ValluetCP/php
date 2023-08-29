@@ -83,7 +83,8 @@ if(isset($_POST['connect'])){
     $db = dbConnexion();
     //préparer la requete, est-ce que le pseudo est dans la bdd? à l'aide d'une requête de lecture
     $connexionRequest = $db->prepare("SELECT * FROM membres WHERE pseudo = ?");
-    // ? car c'est une requete préparé.
+    // La method prepare est une requete préparé. Pour question de sécurité. Apparaît à chaque fois qu'il y a la clause WHERE.  Evite que l'utilisateur saisisse les infos directement depuis l'URL.
+    // Le " ? "
     
     //exécuter une requête
     $connexionRequest->execute(array($pseudo));
@@ -129,7 +130,9 @@ if(isset($_POST['connect'])){
     } 
 }
 
-//pour la publication
+
+//pour la page publication "fichier : post.php".
+
 if(isset($_POST['publier'])){
     $message = htmlspecialchars($_POST['message']);
     $image_name = $_FILES['img']['name'];
@@ -142,9 +145,12 @@ if(isset($_POST['publier'])){
     $dbconnect = dbconnexion();
     // préparation de la requête
     $request = $dbconnect->prepare("INSERT INTO posts (membre_id, photo, text) VALUES (?,?,?)");
-    //executtion de la requête
+
+    //execution de la requête
     try{
         $request->execute(array($_SESSION["id"], $image_name, $message));
+        // retour à la page d'accueil après avoir publié
+        header("Location: accueil_membre.php"); 
     }catch(PDOException $e){
         echo $e->getMessage();
     }
