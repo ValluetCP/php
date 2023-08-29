@@ -1,18 +1,16 @@
 
 <?php
 session_start(); // à mettre avant le html pour démarrer une session
-
+// echo $_COOKIE['id_user'];
 require_once 'fonction.php';
 
-if(!isset($_SESSION['id'])){ // vérifie si la session est active
+if(!isset($_COOKIE['id_user'])){ // vérifie si la session est active
     header("Location: connexion.php"); // redirection vers la page connexion (le formulaire de connexion)
     
     // cette page doit être accessible uniquement si l'utilisateur est connecté
 }
 $listPost = getPost(); // récupérer la list des posts
-echo "<pre>";
-print_r($listPost);
-echo "<pre>";
+//  
 
 ?>
 <!DOCTYPE html>
@@ -35,8 +33,11 @@ echo "<pre>";
                 <div class="postimg"><img src="image/<?= $post['photo'];?>" alt="image"></div>
             </div>
             <p><?= $post['text']; ?></p>
-            <span><?= $post['likes']; ?></span>
-            <a href="traitement_2.php?idpost=<?= $post['id_post'];?>"><i class="fa-solid fa-heart"></i></a>
+            <div class="likeZone">
+                <span><?= $post['likes']; ?></span>
+                <p class="txtLike">likes</p>
+                <a href="traitement_2.php?idpost=<?= $post['id_post'];?>"><i class="fa-solid fa-heart"></i></a>
+            </div>
         <?php } ?>
     </div>
 

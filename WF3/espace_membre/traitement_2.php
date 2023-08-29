@@ -115,6 +115,10 @@ if(isset($_POST['connect'])){
             La première valeur : c'est la clé, on la nomme comme on le souhaite
             La seconde valeur: c'est le nom des colonnes*/
             // $_MAJUSCULE : tous les éléments de ce type retourne des tableaux
+
+            //creation du cookie qui va stocker la valeur (= l'dentifiant de l'utilisateur) pour permettre une meilleure expérience.
+            // c'est à dire, on va la connecter automatiquement après vérification du cookie
+            setcookie("id_user", $utilisateur['id_membre'], time()+3600, '/', 'localhost', false, true);
             
             header("Location: accueil_membre.php");// redirige vers accueil_membre.php, penser à ajouter sur cette page, en haut, la fonction session_start();
 
@@ -154,5 +158,23 @@ if(isset($_POST['publier'])){
     }catch(PDOException $e){
         echo $e->getMessage();
     }
+}
+
+if(isset($_GET['idpost'])){
+    // connexion à la base de donnée
+    $dbconnect = dbconnexion();
+    // préparation de la requête
+    $request = $dbconnect->prepare("SELECT likes FROM posts WHERE id_post = ?");
+    //executer la requete
+    $request->execute(array($_GET['idpost']));
+    // on récupère le résultat
+    $likes = $request->fetch();
+
+    // echo $likes['likes'];
+    // requête pour modifier le nombre de like
+    $request1 = $dbconnect->prepare("UPDATE posts SET likes = ? WHERE id_post = ?");
+    // exécute la requête
+    $request1->execute(array($likes['likes']+1, $_GET['idpost']));
+    header(('Location: accueil_membre.php'));
 }
 ?>
