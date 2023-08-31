@@ -30,4 +30,6 @@ function getPost(){
     return $lesPosts; // retourne la liste des posts
 }
 
+
+
 ?>

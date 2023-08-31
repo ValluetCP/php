@@ -88,6 +88,7 @@ if(isset($_POST['connect'])){
     
     //exécuter une requête
     $connexionRequest->execute(array($pseudo));
+    
     //récupère le résultat de la requete dans le tableau : $utilisateur
     $utilisateur = $connexionRequest->fetch(PDO::FETCH_ASSOC); // converti le résultat de la requête en tableau pour le manipuler facilement. On départ c'est objet
     // "fetch", "prepare", "exécute"...  sont des méthod de la class PDO qui nous les fournis
@@ -104,6 +105,9 @@ if(isset($_POST['connect'])){
     }else{//sinon
         //vérifie le mot de passe (est-ce cette chaine de caractère qui est à l'origine du cryptage)
         if(password_verify($mdp,$utilisateur["mdp"])){
+        // ou
+        //if($mdpCrypt == $utilisateur["mdp"]){
+            
             //créer les variable de session
             $_SESSION["id"] = $utilisateur['id_membre'];
             $_SESSION["pseudo"] = $utilisateur['pseudo'];
@@ -119,6 +123,10 @@ if(isset($_POST['connect'])){
             //creation du cookie qui va stocker la valeur (= l'dentifiant de l'utilisateur) pour permettre une meilleure expérience.
             // c'est à dire, on va la connecter automatiquement après vérification du cookie
             setcookie("id_user", $utilisateur['id_membre'], time()+3600, '/', 'localhost', false, true);
+
+            echo '<pre>';
+            var_dump($_COOKIE);
+            echo '<pre>';
             
             header("Location: accueil_membre.php");// redirige vers accueil_membre.php, penser à ajouter sur cette page, en haut, la fonction session_start();
 
