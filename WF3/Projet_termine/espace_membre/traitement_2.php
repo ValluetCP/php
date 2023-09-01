@@ -90,13 +90,13 @@ if(isset($_POST['connect'])){
     $connexionRequest->execute(array($pseudo));
     
     //récupère le résultat de la requete dans le tableau : $utilisateur
-    $utilisateur = $connexionRequest->fetch(PDO::FETCH_ASSOC); // converti le résultat de la requête en tableau pour le manipuler facilement. On départ c'est objet
+    $utilisateur = $connexionRequest->fetch(PDO::FETCH_ASSOC); // converti le résultat de la requête en tableau pour le manipuler facilement. Au départ c'est objet
     // "fetch", "prepare", "exécute"...  sont des méthod de la class PDO qui nous les fournis
 
     echo "<pre>";
     print_r($utilisateur);
     echo "<pre>";
-    //si aucun utilisateur de correspond, il retourne un tableau vide
+    //si aucun utilisateur ne correspond, il retourne un tableau vide
     if(empty($utilisateur)){ // si le tableau $utilisateur est vide
         // echo "Utilisateur inconnu...";
         $_SESSION['error'] = "Utilisateur inconnu..."; // ajouter le message d'erreur dans le tableau $_SESSION

@@ -1,11 +1,19 @@
 <?php
+    
+    session_start(); 
     require_once('./inc/function.php');
     require_once('./inc/header.php');
+
+    
 ?>
 
 <div class="container">
     <h1>Contact form</h1>
     <form action="./model/security.php" method="post">
+
+        <?php if(isset($_SESSION['error'])){?>
+            <p><?= $_SESSION['error']; ?></p>
+        <?php } unset($_SESSION['error']); ?>
 
         <div class="form-group">
             <label for="email">Email :</label>
