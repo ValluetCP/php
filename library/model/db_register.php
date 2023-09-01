@@ -34,6 +34,8 @@ if(isset($_POST['submit'])){ // c'est pour l'inscription
     try{
         $request->execute(array($civility,$firstname,$lastname,$email,$passwordCrypt,$birthday,$phone,$message,$country,$conditions));
         // redirection vers une page de notre choix
+        header("Location: ../connection.php");
+        
     }catch(PDOException $e){
         echo $e->getMessage();
     }

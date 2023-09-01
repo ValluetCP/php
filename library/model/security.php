@@ -1,18 +1,20 @@
 <?php
+session_start(); 
 require_once ("../inc/db_connection.php");
 require_once ("../inc/function.php");
 
 
 if(isset($_POST['submit'])){
+    $firstname = htmlspecialchars($_POST['firstname']);
     $email = htmlspecialchars($_POST['email']);
     $password = htmlspecialchars($_POST['password']);
-    $mdpHash = password_hash($password, PASSWORD_DEFAULT);
+    // $mdpHash = password_hash($password, PASSWORD_DEFAULT);
 
     // Connection à la base de donnée
     $connectDb = dbConnexion();
 
     // Préparation de la requête
-    $request = $connectDb->prepare('SELECT * FROM user WHERE email = ?');
+    $request = $connectDb->prepare('SELECT * FROM user WHERE  email = ?');
 
     // Execution de la requête
     $request->execute(array($email));
@@ -22,39 +24,49 @@ if(isset($_POST['submit'])){
     echo '<pre>';
     print_r($utilisateur);
     echo '<pre>';
+    
 
-
+    // if(empty($_SESSION["firstname"])){
+    //     $_SESSION['errorUser'] = "Utilisateur inconnu.."; 
+    // header("Location: ../connection.php"); 
+    // }
 
      
  if(empty($utilisateur)){ 
     
-    $_SESSION['error'] = "Utilisateur inconnu..."; 
-    header("Location: connexion.php"); 
+    $_SESSION['errorUser'] = "Veuillez remplir tous les champs"; 
+    header("Location: ../connection.php"); 
+    
+    // $_SESSION['errorUser'] = "Utilisateur inconnu..."; 
+    // header("Location: ../connection.php");
+
+    // if(empty($_SESSION["firstname"]))
 
 }else{
 
-    if(password_verify($password,$utilisateur["$password"])){
+    if(password_verify($password,$utilisateur["password"])){
     // ou
     //if($mdpCrypt == $utilisateur["mdp"]){
         
         //créer les variable de session
-        $_SESSION["id"] = $utilisateur['id_membre'];
+        $_SESSION["id"] = $utilisateur['id_user'];
         $_SESSION["email"] = $utilisateur['email'];
+        $_SESSION["firstname"] = $utilisateur['firstname'];
 
-        setcookie("id_user", $utilisateur['id_membre'], time()+3600, '/', 'localhost', false, true);
+        // setcookie("id_user", $utilisateur['id_membre'], time()+3600, '/', 'localhost', false, true);
 
-        echo '<pre>';
-        var_dump($_COOKIE);
-        echo '<pre>';
+        // echo '<pre>';
+        // var_dump($_COOKIE);
+        // echo '<pre>';
         
-        header("Location: accueil_membre.php");// redirige vers accueil_membre.php, penser à ajouter sur cette page, en haut, la fonction session_start();
+        header("Location: ../profil.php");// redirige vers accueil_membre.php, penser à ajouter sur cette page, en haut, la fonction session_start();
 
-        // autre syntaxe : 
+        // autre syntaxe :
         // echo"<script>location.href='accueil_membre.php'</script>";
         
     }else{
         $_SESSION['error'] = "mot de passe incorrect";
-        header("Location: connexion.php"); 
+        header("Location: ../connection.php"); 
         // header("refresh:2;http://localhost/php/WF3/espace_membre/connexion.php");
     }
     
@@ -66,7 +78,7 @@ if(isset($_POST['submit'])){
 
 }
 
-
+die;
 
 
  //si aucun utilisateur ne correspond, il retourne un tableau vide

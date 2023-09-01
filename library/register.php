@@ -4,7 +4,7 @@
 ?>
 
 <div class="container">
-    <h1>Contact form</h1>
+    <h1>Register form</h1>
     <form action="./model/db_register.php" method="post">
 
         <div class="form-group mt-5 mb-5">

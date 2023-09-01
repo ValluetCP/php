@@ -6,7 +6,10 @@ echo "test";
 require_once('./inc/header.php');
 ?>
 
-<h1>Page d'accueil</h1>
+<div class="container">
+    <h1>Home Library</h1>
+    
+</div>
 
 <?php
 require_once('./inc/footer.php');
