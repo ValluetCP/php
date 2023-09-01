@@ -24,7 +24,7 @@ if(isset($_POST['nom']) && isset($_POST['prenom']) && isset($_POST['password']) 
 // ! empty 
 //$_GET OU $_POST
 
-if(empty($_POST['nom']) or empty($_POST['prenom'])   or empty($_POST['password']) ) { ?>    
+if(empty($_POST['nom']) or empty($_POST['prenom']) or empty($_POST['password']) ) { ?>    
 
 <div class="alert alert-danger" role="alert">
     Vous devez remplir tout les champs.

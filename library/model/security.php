@@ -26,10 +26,7 @@ if(isset($_POST['submit'])){
     echo '<pre>';
     
 
-    // if(empty($_SESSION["firstname"])){
-    //     $_SESSION['errorUser'] = "Utilisateur inconnu.."; 
-    // header("Location: ../connection.php"); 
-    // }
+    
 
      
  if(empty($utilisateur)){ 
@@ -37,14 +34,15 @@ if(isset($_POST['submit'])){
     $_SESSION['errorUser'] = "Veuillez remplir tous les champs"; 
     header("Location: ../connection.php"); 
     
-    // $_SESSION['errorUser'] = "Utilisateur inconnu..."; 
-    // header("Location: ../connection.php");
 
-    // if(empty($_SESSION["firstname"]))
-
+    // }elseif(empty($_SESSION["firstname"])){
+        
+    //     $_SESSION['errorUser'] = "Utilisateur inconnu.."; 
+    //     header("Location: ../connection.php"); 
+    
 }else{
 
-    if(password_verify($password,$utilisateur["password"])){
+    if(password_verify($password,$utilisateur["password"]) && $utilisateur['firstname'] == $firstname){
     // ou
     //if($mdpCrypt == $utilisateur["mdp"]){
         
@@ -65,16 +63,15 @@ if(isset($_POST['submit'])){
         // echo"<script>location.href='accueil_membre.php'</script>";
         
     }else{
-        $_SESSION['error'] = "mot de passe incorrect";
+        $_SESSION['error_password'] = "mot de passe incorrect";
+        $_SESSION['error_firstname'] = "prénom incorrect";
         header("Location: ../connection.php"); 
         // header("refresh:2;http://localhost/php/WF3/espace_membre/connexion.php");
     }
     
 } 
 
-    
-
-    
+  
 
 }
 

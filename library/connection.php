@@ -8,7 +8,11 @@
     <h1>Connection</h1>
     <form action="./model/security.php" method="post">
 
-        <?php if(isset($_SESSION['error'])){?>
+        <?php if(isset($_SESSION['error_password'])){?>
+            <div class="alert alert-warning" role="alert"><?= $_SESSION['error']; ?></div>
+        <?php } unset($_SESSION['error']); ?>
+        
+        <?php if(isset($_SESSION['error_firstname'])){?>
             <div class="alert alert-warning" role="alert"><?= $_SESSION['error']; ?></div>
         <?php } unset($_SESSION['error']); ?>
         
