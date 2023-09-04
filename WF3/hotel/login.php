@@ -2,13 +2,13 @@
 
 <div class="container">
     <form action="./model/connexion.php" method="post">
-        <div class="form-group">
-            <label for="email">Email :</label>
+        <div class="form-group mb-3">
+            <label  class="m-2" for="email">Email :</label>
             <input type="email" class="form-control" id="email" name="email" >
         </div>
  
-        <div class="form-group">
-            <label for="password">Password :</label>
+        <div class="form-group mb-3">
+            <label  class="m-2" for="password">Password :</label>
             <input type="password" class="form-control" id="password" name="password" >
         </div>
 

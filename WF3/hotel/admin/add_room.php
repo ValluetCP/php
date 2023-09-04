@@ -1,12 +1,19 @@
 <?php include_once "../inc/header.php"; ?>
+<?php require_once "../model/functions.php"; 
+$listHotel = hotelList();
+?>
+
 
 <div class="container">
-    <form action="../model/db_hotel.php" method="post">     
+    <form action="../model/db_room.php" method="post" enctype="multipart/form-data">     
  
         <div class="form-group mb-3">
             <label class="m-2">Hotel :</label>
-            <select name="hotel">
-                
+            <select name="hotel" class="form-control">
+                <option value="">Choose hotel</option>
+                <?php foreach($listHotel as $hotel){ ?>
+                    <option value="<?= $hotel['id_hotel']; ?>"><?= $hotel['hotel_name']; ?></option>
+                <?php } ?>
             </select>
         </div>
         
@@ -27,14 +34,19 @@
  
         <div class="form-group mb-3">
             <label class="m-2">Category :</label>
-            <select name="category">
+            <select name="category" class="form-control">
                 <option value="">Choose category</option>
                 <option value="classic">Classic</option>
                 <option value="vip">VIP</option>
             </select>
         </div>
+        
+        <div class="form-group mb-3">
+            <label class="m-2">Photo :</label>
+            <input type="file" class="form-control" name="image" >
+        </div>
 
-        <button type="submit" id="bouton" class="btn btn-primary mt-5 mb-5" name="add_hotel" value="submit">Add hotel</button>
+        <button type="submit" id="bouton" class="btn btn-primary mt-5 mb-5" name="add_room" value="submit">Add hotel</button>
     </form>
 </div>
 
