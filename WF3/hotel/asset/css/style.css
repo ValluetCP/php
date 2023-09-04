@@ -8,3 +8,8 @@ body{
     display: flex;
     justify-content: flex-end;
 } */
+
+i{
+    font-size: 3em;
+    margin: 20px 0;
+}

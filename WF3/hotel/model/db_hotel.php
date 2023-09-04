@@ -1,0 +1,25 @@
+<?php
+require_once "../inc/database.php";
+
+if(isset($_POST['add_hotel'])){
+    // récupération des infos
+    $hotelName = htmlspecialchars($_POST['name_hotel']);
+    $location = htmlspecialchars($_POST['location_hotel']);
+    $capacityHotel = htmlspecialchars($_POST['capacity_hotel']);
+
+    // se connecter à la bdd
+    $db = dbConnexion();
+    
+    // préparer la requête
+    $request = $db->prepare("INSERT INTO hotels (location, capacity, hotel_name) VALUES (?,?,?)");
+    
+    // exécuter la requête
+    try{
+        $request->execute(array($location, $capacityHotel, $hotelName));
+        header(("Location: http://localhost/php/WF3/hotel/admin/hotel_list.php"));
+    }catch(PDOException $e){
+        $e->getMessage();
+    }
+
+
+}
