@@ -1,6 +1,7 @@
 <?php
-require_once("../inc/database.php");
+require_once $_SERVER["DOCUMENT_ROOT"]."/php/WF3/hotel/inc/database.php";
 
+// LIST HOTEL
 
 function hotelList(){
     
@@ -23,6 +24,31 @@ function hotelList(){
     echo $e->getMessage();
     }
     return $listHotel;
+}
+
+
+// LIST ROOM
+
+function roomList(){
+    // se connecter à la db (data base) ou bd (base de donnée)
+    $db = dbConnexion();
+
+    // préparer une requête de lecture (récupérer la liste des hôtels)
+    $request = $db->prepare("SELECT * from rooms");
+
+    // exécuter la requête
+    $listRoom = null;
+
+    try{
+    
+        $request->execute();
+    
+        // récupère le résultat dans un tableau
+        $listRoom = $request->fetchAll(PDO::FETCH_ASSOC);
+    }catch(PDOException $e){
+        echo $e->getMessage();
+    }
+    return $listRoom;
 }
 
 ?>
