@@ -51,4 +51,29 @@ function roomList(){
     return $listRoom;
 }
 
+
+// LIST BOOK
+
+function bookList(){
+    // se connecter à la db (data base) ou bd (base de donnée)
+    $db = dbConnexion();
+
+    // préparer une requête de lecture (récupérer la liste des hôtels)
+    $request = $db->prepare("SELECT * from books");
+
+    // exécuter la requête
+    $listBook = null;
+
+    try{
+    
+        $request->execute();
+    
+        // récupère le résultat dans un tableau
+        $listBook = $request->fetchAll(PDO::FETCH_ASSOC);
+    }catch(PDOException $e){
+        echo $e->getMessage();
+    }
+    return $listBook;
+}
+
 ?>

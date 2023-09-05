@@ -42,7 +42,13 @@ if(isset($_POST['book'])){
                 // préparer la requête pour réserver la chambre
                 $request = $db->prepare("INSERT INTO `bookings`(`booking_start_date`, `booking_end_date`, `user_id`, `room_id`, `booking_price`, `booking_state`) VALUES (?,?,?,?,?,?)");
 
-                $request->execute(array($startDate,$endDate,));
+                try{
+                    $request->execute(array($startDate,$endDate,));
+                    header("Location: http://localhost/php/WF3/hotel/admin/book_list.php");
+
+                }catch(PDOException $e){
+                    echo $e->getMessage();
+                }
             }
         }
         
