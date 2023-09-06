@@ -16,7 +16,7 @@ if(isset($_POST['add_hotel'])){
     // exécuter la requête
     try{
         $request->execute(array($location, $capacityHotel, $hotelName));
-        header(("Location: http://localhost/php/WF3/hotel/admin/hotel_list.php"));
+        header(("Location: https://unhelped-drawer.000webhostapp.com/admin/hotel_list.php"));
     }catch(PDOException $e){
         $e->getMessage();
     }

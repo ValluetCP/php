@@ -1,5 +1,5 @@
 <?php
-require_once $_SERVER["DOCUMENT_ROOT"]."/php/WF3/hotel/inc/database.php";
+require_once $_SERVER["DOCUMENT_ROOT"]."/inc/database.php";
 
 // LIST HOTEL
 
@@ -52,28 +52,52 @@ function roomList(){
 }
 
 
-// LIST BOOK
-
-function bookList(){
+function userBookList($idUser){
     // se connecter à la db (data base) ou bd (base de donnée)
     $db = dbConnexion();
 
     // préparer une requête de lecture (récupérer la liste des hôtels)
-    $request = $db->prepare("SELECT * from books");
+    $request = $db->prepare("SELECT * from bookings WHERE user_id = ? AND booking_state = ?");
+   
 
     // exécuter la requête
-    $listBook = null;
+    $userBookList = null;
 
     try{
     
-        $request->execute();
+        $request->execute(array($idUser,'in progress'));
     
         // récupère le résultat dans un tableau
-        $listBook = $request->fetchAll(PDO::FETCH_ASSOC);
+        $userBookList = $request->fetchAll(PDO::FETCH_ASSOC);
     }catch(PDOException $e){
         echo $e->getMessage();
     }
-    return $listBook;
+    return $userBookList;
 }
+
+
+// // LIST BOOK
+
+// function bookList(){
+//     // se connecter à la db (data base) ou bd (base de donnée)
+//     $db = dbConnexion();
+
+//     // préparer une requête de lecture (récupérer la liste des hôtels)
+//     $request = $db->prepare("SELECT * from books");
+
+//     // exécuter la requête
+//     $listBook = null;
+
+//     try{
+    
+//         $request->execute();
+    
+//         // récupère le résultat dans un tableau
+//         $listBook = $request->fetchAll(PDO::FETCH_ASSOC);
+//     }catch(PDOException $e){
+//         echo $e->getMessage();
+//     }
+//     return $listBook;
+// }
 
 ?>

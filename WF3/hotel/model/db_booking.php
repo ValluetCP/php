@@ -27,7 +27,8 @@ if(isset($_POST['book'])){
     // si $today est supérieur à la date de début de réservation ou $today est supérieur à la date de fin de réservation.
     if(strtotime($today) > strtotime($startDate) || strtotime($today) > strtotime($endDate)){
         echo'<script>alert("votre date de début ou de fin de réservation ne peut pas être pas être inférieur à la date d\'aujourd\'hui")</script>';
-        header("Location: http://localhost/php/WF3/hotel/booking.php");
+        echo '<script>window.location.href = "https://unhelped-drawer.000webhostapp.com/booking.php?room='.$idRoom.'&price='.$price.'";</script>';
+
     }else{
         //  se connecter à la bdd
         $db = dbConnexion();
@@ -48,8 +49,8 @@ if(isset($_POST['book'])){
     
                     try{
                         $request->execute(array($startDate,$endDate,$_SESSION['id_user'],$idRoom,$price*$nbDays,"in progress"));
-                        // Réservation réussie
-                        echo "Réservation réussie!";
+                        // rediriger vers user_home.php
+                        header("Location: https://unhelped-drawer.000webhostapp.com/user_home.php");
     
                     }catch(PDOException $e){
                         echo $e->getMessage();
@@ -69,6 +70,18 @@ if(isset($_POST['book'])){
 
     }
     
+}
 
-    
+if(isset($_GET['id_book'])){
+   //  se connecter à la bdd
+   $db = dbConnexion();
+   $request = $db->prepare("UPDATE bookings SET booking_state = ? WHERE id_booking = ?");
+
+   try{
+    $request->execute(array("cancel", $_GET['id_book']));
+    // redirection vers user_home.php
+    header("Location: https://unhelped-drawer.000webhostapp.com/user_home.php" );
+   }catch(PDOException $e){
+    echo $e->getMessage();
+   }
 }

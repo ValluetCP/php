@@ -12,7 +12,7 @@ if(isset($_POST['add_room'])){
     $imgName = $_FILES['image']['name'];
     $tmpName = $_FILES['image']['tmp_name'];
 
-    $destination = $_SERVER["DOCUMENT_ROOT"].'/php/WF3/hotel/asset/img/'.$imgName;
+    $destination = $_SERVER["DOCUMENT_ROOT"].'/asset/img/'.$imgName;
 
     // Toujours mettre move_uploaded_file dans un if
     if(move_uploaded_file($tmpName, $destination)){
@@ -27,7 +27,7 @@ if(isset($_POST['add_room'])){
         try{
             $request->execute(array($roomNumber,$hotel,$roomPrice,$imgName,$person,$category));
             // redirection vers list_room.php
-            header("Location: http://localhost/php/WF3/hotel/admin/room_list.php");
+            echo '<script>window.location.href = "https://unhelped-drawer.000webhostapp.com/admin/room_list.php";</script>';
         }catch(PDOException $e){
             echo $e->getMessage();
         }

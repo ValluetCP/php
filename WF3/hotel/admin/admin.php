@@ -3,7 +3,7 @@
 session_start();
 // Si ($_SESSION['role'] est définie mais que sa valeur diffère de 'admin', ou bien que 'role' n'est pas définie alors ...
 if(!isset($_SESSION['role'])){
-    header("Location: http://localhost/php/WF3/hotel/login.php");
+    header("Location: https://unhelped-drawer.000webhostapp.com/login.php");
 }
 
 include_once "../inc/header.php"; 
