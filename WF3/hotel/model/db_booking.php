@@ -13,48 +13,62 @@ if(isset($_POST['book'])){
     $price = htmlspecialchars($_POST['price']);
 
     // chaine de caractère converti en date
-    $startDate = strtotime($startDate);
-    $endDate = strtotime($endDate);
+    $dateStart = strtotime($startDate);
+    $dateEnd = strtotime($endDate);
 
-    $duration = $endDate - $startDate;
+    $duration = $dateEnd - $dateStart;
 
     // echo $duration;
 
     $nbDays = $duration / 86400;
 
-    echo "le nombre de jours est : $nbDays";
-    die;
+    $today = date('Ymd'); // la date d'aujourd'hui
+
+    // si $today est supérieur à la date de début de réservation ou $today est supérieur à la date de fin de réservation.
+    if(strtotime($today) > strtotime($startDate) || strtotime($today) > strtotime($endDate)){
+        echo'<script>alert("votre date de début ou de fin de réservation ne peut pas être pas être inférieur à la date d\'aujourd\'hui")</script>';
+        header("Location: http://localhost/php/WF3/hotel/booking.php");
+    }else{
+        //  se connecter à la bdd
+        $db = dbConnexion();
     
-    //  se connecter à la bdd
-    $db = dbConnexion();
-
-    //préparer la requête pour vérifier si la chambre est dispo entre la date de départ et la date de fin
-    $request = $db->prepare('SELECT * FROM bookings WHERE room_id = ? AND 	booking_start_date < ? AND booking_end_date > ?');
-
-    try{
-        //executer la requete
-        $request->execute(array($idRoom,$startDate,$endDate));
-        // récupére le résultat
-        $books = $request->fetch();
-        
-        if(empty($books)){
-            if($startDate < $endDate){
-                // préparer la requête pour réserver la chambre
-                $request = $db->prepare("INSERT INTO `bookings`(`booking_start_date`, `booking_end_date`, `user_id`, `room_id`, `booking_price`, `booking_state`) VALUES (?,?,?,?,?,?)");
-
-                try{
-                    $request->execute(array($startDate,$endDate,));
-                    header("Location: http://localhost/php/WF3/hotel/admin/book_list.php");
-
-                }catch(PDOException $e){
-                    echo $e->getMessage();
+        //préparer la requête pour vérifier si la chambre est dispo entre la date de départ et la date de fin
+        $request = $db->prepare("SELECT * FROM bookings WHERE room_id = ? AND ((booking_start_date <= ? AND booking_end_date >= ?) OR (booking_start_date <= ? AND booking_end_date >= ?))");
+    
+        try{
+            //executer la requete
+            $request->execute(array($idRoom, $startDate, $startDate, $endDate, $endDate));
+            // récupére le résultat
+            $books = $request->fetch();
+            
+            if(empty($books)){
+                if($startDate < $endDate){
+                    // préparer la requête pour réserver la chambre
+                    $request = $db->prepare("INSERT INTO `bookings`(`booking_start_date`, `booking_end_date`, `user_id`, `room_id`, `booking_price`, `booking_state`) VALUES (?,?,?,?,?,?)");
+    
+                    try{
+                        $request->execute(array($startDate,$endDate,$_SESSION['id_user'],$idRoom,$price*$nbDays,"in progress"));
+                        // Réservation réussie
+                        echo "Réservation réussie!";
+    
+                    }catch(PDOException $e){
+                        echo $e->getMessage();
+                    }
+                }else{
+                    // Dates invalides
+                    echo "Les dates de réservation ne sont pas valides.";
                 }
+            }else {
+                // La chambre n'est pas disponible pour ces dates
+                echo "La chambre n'est pas disponible pour les dates sélectionnées.";
             }
+            
+        }catch(PDOException $e){
+            echo $e->getMessage();
         }
-        
-    }catch(PDOException $e){
-        echo $e->getMessage();
+
     }
+    
 
     
 }
