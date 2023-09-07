@@ -50,7 +50,7 @@ if(isset($_POST['book'])){
                     try{
                         $request->execute(array($startDate,$endDate,$_SESSION['id_user'],$idRoom,$price*$nbDays,"in progress"));
                         // rediriger vers user_home.php
-                        header("Location: https://unhelped-drawer.000webhostapp.com/user_home.php");
+                        echo '<script>window.location.href = "https://unhelped-drawer.000webhostapp.com/user_home.php";</script>';
     
                     }catch(PDOException $e){
                         echo $e->getMessage();
@@ -80,7 +80,7 @@ if(isset($_GET['id_book'])){
    try{
     $request->execute(array("cancel", $_GET['id_book']));
     // redirection vers user_home.php
-    header("Location: https://unhelped-drawer.000webhostapp.com/user_home.php" );
+    echo '<script>window.location.href = "https://unhelped-drawer.000webhostapp.com/user_home.php";</script>';
    }catch(PDOException $e){
     echo $e->getMessage();
    }
