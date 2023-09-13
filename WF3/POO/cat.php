@@ -27,7 +27,7 @@ class Cat{
     }
     
     public function setAge($newAge){
-        // le seter, son rôle est de mettre à jour(modifier) la propriété en question déclare avec le mot clé private
+        // le seter, son rôle est de mettre à jour(modifier) la propriété en question déclaré avec le mot clé private
         $this->age = $newAge;
     }
     
