@@ -8,7 +8,7 @@ CONSIGNES
 -->
 
 <?php
-
+session_start();
 require_once("../utilisateur.php");
 
 if(isset($_POST['inscription'])){
@@ -17,10 +17,26 @@ if(isset($_POST['inscription'])){
     $prenom=htmlspecialchars($_POST['prenom']);
     $email=htmlspecialchars($_POST['email']);
     $mdp=htmlspecialchars($_POST['mdp']);
+    
+    $mdp=password_hash($mdp,PASSWORD_DEFAULT);
 
     // on appel le constructeur
     $utilisateur = new Utilisateur($nom,$prenom,$email,$mdp);
     $utilisateur->inscrire();
+
+    
+}
+
+
+
+if(isset($_POST['connexion'])){
+    // récupération des données saisies par l'utilisateur
+    $email=htmlspecialchars($_POST['email']);
+    $mdp=htmlspecialchars($_POST['mdp']);
+    
+    // appel de la methode statique connexion
+    Utilisateur::connexion($email, $mdp);
+    
 
     
 }
