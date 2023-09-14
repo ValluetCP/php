@@ -8,8 +8,9 @@
 //  2) perimetre
 
 abstract class FormeGeometrique{
-    public $surface;
-    public $perimetre;
+    // utilisé le mot clé 'protected' pour déclarer les attributs d'une class mère. 
+    protected $surface;
+    protected $perimetre;
 
     public function __construct($surface, $perimetre){
         $this->surface = $surface;
@@ -23,18 +24,21 @@ abstract class FormeGeometrique{
 // 2) largeur
 // et les methodes calculerSurface et calculerPerimetre
 class Rectangle extends FormeGeometrique{
-    public $longueur;
-    public $largeur;
+    // utilisé le mot clé 'private' pour déclarer les attributs d'une class fille (qui ne donnera pas d'enfant à son tour).
+    private $longueur;
+    private $largeur;
 
     public function __construct($surface,$perimetre,$longueur,$largeur){
-        $this->surface = $surface;
-        $this->perimetre = $perimetre;
+        // $this->surface = $surface;
+        // $this->perimetre = $perimetre;
+        parent::__construct($surface,$perimetre); // attention à l'ordre des paramètres
         $this->longueur = $longueur;
         $this->largeur = $largeur;
     }
 
     public function calculerSurface(){
-        return $this->surface = $this->longueur*$this->largeur;   
+        return $this->surface = $this->longueur*$this->largeur;
+        // return $this->surface;   // autre syntaxe
     }
 
     public function calculerPerimetre(){
@@ -53,7 +57,8 @@ echo "Le perimetre du rectangle est de : ".$rectangle->calculerPerimetre()."<br>
 // 2) et les methodes calculerSurface et calculerPerimetre
 
 class Cercle extends FormeGeometrique{
-    public $rayon;
+    // utilisé le mot clé 'private' pour déclarer les attributs d'une class fille (qui ne donnera pas d'enfant à son tour).
+    private $rayon;
 
     public function __construct($surface,$perimetre,$rayon){
         $this->surface = $surface;
@@ -63,6 +68,10 @@ class Cercle extends FormeGeometrique{
 
     public function calculerSurface(){
         return $this->surface = round(M_PI * ($this->rayon * $this->rayon),2);
+        // return $this->surface = round(pi() * pow($this->rayon,2),2);
+        // Autre syntaxe
+        // pow : pour la fonction au carré ou puissance, le deuxième paramètre est le chiffre carré ou puissance.
+        // M_PI et pi() : appel la fonction pie
         
     }
 
