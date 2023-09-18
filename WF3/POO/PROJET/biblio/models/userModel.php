@@ -18,8 +18,10 @@ class User{
         // exécuter la requête
         try {
             $request->execute(array($name, $email, $password));
+
             // rediriger vers la page login.php
             header("Location: http://localhost/php/WF3/POO/PROJET/biblio/views/login");
+            
         } catch (PDOException $e) {
             echo $e->getMessage();
         }
@@ -39,7 +41,9 @@ class User{
             $request->execute(array($email));
 
             // récupérer le résultat de la requête dans un tableau
-            $user = $request->fetch();
+            $user = $request->fetch(PDO::FETCH_ASSOC);
+            // var_dump($user['name']);
+            // die;
 
             // vérifier si l'email existe dans la base de donnée
             if(empty($user)){

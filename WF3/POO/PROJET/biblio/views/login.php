@@ -25,7 +25,8 @@ session_start();
 
         <?php if(isset($_SESSION['error_message'])){?>
             <p style="color: red"><?= $_SESSION['error_message']; ?></p>
-        <?php unset($_SESSION['error_message']);} ?>
+        <?php unset($_SESSION['error_message']);
+    } ?>
 
         
         <button name="login" >Se connecter</button>
