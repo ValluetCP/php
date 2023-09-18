@@ -1,8 +1,8 @@
 <?php
+session_start();
 require_once "../../models/userModel.php";
 
 if(isset($_POST['inscription'])){
-    echo "test";
     $name = htmlspecialchars($_POST['name']);
     $email = htmlspecialchars($_POST['email']);
     $password = htmlspecialchars($_POST['password']);
@@ -16,5 +16,13 @@ if(isset($_POST['inscription'])){
     // la méthode inscription étant static donc on utilise le nom de la classe suivi de "::" ensuite le nom de la méthode qui est inscriptions.
 }
 
+
+if(isset($_POST['login'])){
+    $email = htmlspecialchars($_POST['email']);
+    $password = htmlspecialchars($_POST['password']);
+
+   // apeler la methode connexion de la classe User 
+   User::connexion($email,$password);
+}
 
 ?>
