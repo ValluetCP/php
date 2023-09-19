@@ -7,6 +7,8 @@
 
 </head>
 <body>
+    <?php require_once "./inc/nav.php";?>
+    <h1>Register</h1>
     <form action="traitement/action.php" method="post">
         <div>
             <label for="">Name</label>

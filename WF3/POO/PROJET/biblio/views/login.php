@@ -12,12 +12,15 @@ session_start();
 
 </head>
 <body>
+    <?php require_once "./inc/nav.php";?>
+    <h1>Login</h1>
     <form action="traitement/action.php" method="post">
         
         <div>
             <label for="">Email</label>
             <input type="email" name="email" id="">
         </div>
+
         <div>
             <label for="">Password</label>
             <input type="password" name="password" id="">

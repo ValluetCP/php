@@ -56,19 +56,22 @@ class User{
 
                 // il a taper le bon mail et le bon mot de passe
                 // version avec $_COOKIE
-                setcookie("id_user", $user['id_user'],time() + 86400,"/","http://localhost/php/WF3/POO/PROJET/biblio", false, true);
+                setcookie("id_user", $user['id_user'],time() + 86400,"/","localhost", false, true);
 
                 // version avec $_SESSION
                 // $_SESSION["id_user"] = $user["id_user"];
 
                 // version avec $_COOKIE
-                setcookie("user_role", $user['user_role'],time() + 86400,"/","http://localhost/php/WF3/POO/PROJET/biblio", false, true);
+                setcookie("user_role", $user['role'],time() + 86400,"/","localhost", false, true);
 
                 // version avec $_SESSION
                 // $_SESSION["user_role"] = $user["user_role"];
 
+                // version avec $_COOKIE
+                setcookie("user_name", $user['name'],time() + 86400,"/","localhost", false, true);
+
                 // rediriger vers la page list_book.php
-                header("Location: http://localhost/php/WF3/POO/PROJET/biblio/views/list_book");
+                header("Location: http://localhost/php/WF3/POO/PROJET/biblio/list_book");
 
             }else{
                 $_SESSION['error_message'] = "Mot de passe incorrect";
@@ -78,6 +81,27 @@ class User{
         } catch (PDOException $e) {
             echo $e->getMessage();
         }
+    }
+
+    // methode pour avoir l'historique des emprunts d'un membre
+    public static function borrowLog($idUser){
+        
+        // on appel la fonction dbConnect qui est dans la class Database
+        $db = Database::dbConnect();
+
+        // preparation de la requête
+        $request =$db->prepare("SELECT id_borrow, user_id, book_id, id_book, start_date, end_date, title FROM borrows, books WHERE borrows.book_id = books.id_book AND user_id= ?");
+
+        // exécuter la requête
+        try {
+            $request->execute(array($idUser));
+            // récupérer le résultat dans un tableau
+            $borrowList = $request->fetchAll();
+            return $borrowList;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+
     }
 
     // methode pour se déconnecter

@@ -2,4 +2,106 @@ body{
     margin: 0;
     padding: 0;
     /* background-color: red; */
+    font-family: Arial, Helvetica, sans-serif;
 }
+
+.container{
+    width: 70%;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.book{
+    width: 300px;
+    height: 400px;
+    background-color: burlywood;
+    padding: 10px;
+    margin: 30px 0;
+}
+
+h1,
+h2{
+    text-align: center;
+    margin-bottom: 70px;
+}
+
+h2{
+    font-size: 28px;
+}
+
+nav{
+    width: 100%;
+    height: 80px;
+    background-color: rgb(231, 211, 185);
+    margin-bottom: 50px;
+    display: flex;
+    align-items: center;
+}
+
+nav a{
+    margin: 0 20px;
+}
+
+p{
+    margin-bottom: 20px;
+}
+
+/* FORMULAIRE */
+
+form{
+    width: 50%;
+    margin: auto;
+}
+
+form div{
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+input{
+    width: 100%;
+    height: 40px;
+    margin: 10px 0;
+    border: 1px solid black;
+    border-radius: 10px;
+}
+
+button{
+    width: 30%;
+    height: 40px;
+}
+
+/* TABLE */
+
+table{
+    width: 80%;
+    margin: auto;
+}
+
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+thead{
+    background-color: burlywood;
+}
+
+.center{
+    text-align: center;
+}
+
+tr,
+th,
+td{
+    height: 50px;
+}
+
+.espace{
+    padding-left: 20px;
+}
+
+
+
